@@ -1,0 +1,84 @@
+<?php
+  DEFINE('DB_USERNAME', 'root');
+  DEFINE('DB_PASSWORD', 'root');
+  DEFINE('DB_HOST', 'localhost');
+  DEFINE('DB_DATABASE', 'performance_schema');
+
+  $mysqli = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+
+  if (mysqli_connect_error()) {
+    die('Connect Error ('.mysqli_connect_errno().') '.mysqli_connect_error());
+  }
+
+  echo 'Connected successfully.';
+
+  $mysqli->close();
+?>
+
+=======================================================================
+<?php
+
+$servername = "localhost";
+$username = "root";
+$password = "mypassword";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+  }
+  echo "Connected successfully";
+
+?>
+
+==================================== Form Validation Code =======================
+<?php
+
+
+
+function has_header_validation($str){
+    return preg_match("/[\r\n]" , $str);
+
+}
+
+if (isset($_POST['contact_submit'])) {
+    $name= trim($_POST['name']);
+    $email= trim($_POST['email']);
+    $sub= trim($_POST['subject']);
+    $msg= ($_POST['message']);
+
+
+    if (has_header_validation($name) || has_header_validation($email) || has_header_validation($sub)) {
+        die();
+    }
+
+    if (!$name || !$email || !$sub) {
+       echo '<h2>All Fields Required.</h2><a href="contact.php" class="button block">Go back.</a>';
+       // exit();
+    }
+
+    $to = "youremail@gmail.com";
+
+    $subject = "$name via SeePic form : $sub";
+
+    $message = "Name: $name\r\n";
+    $message .= "Email: $email\r\n";
+    $message .= "Message: \r\n$msg";
+
+    $message = wordwrap($message, 72);
+
+
+    $header = "MIME-Version: 1.0 \r\n";
+    $header .= "Content-type: text/plain; charset=iso-8859-1\r\n"; 
+    $header .= "Form: $name <$email> \r\n";
+    $header .= "X-Priority: 1\r\n";
+
+    mail($to , $subject , $message , $header);
+
+?>
+<h3>Thanks for contacting us!</h3>
+<h4>Please allow us 24hrs for a response.</h4>
+<a href="">Go back Home page</a>
+<?php } else{ ?>
