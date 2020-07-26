@@ -4,4 +4,4 @@
 
 <center><h1 class="my-5 py-5">Error: All Fields are required.</h1></center>
 <center><h2 class="pb-4 mb-4">Please try again.</h2></center>
-<center><a href="index.php/#contact" class="btn btn-success">Go back</a></center>
+<center><a href="index.php" class="btn btn-success">Go back</a></center>
